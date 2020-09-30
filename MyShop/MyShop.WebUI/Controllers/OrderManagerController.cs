@@ -19,8 +19,7 @@ namespace MyShop.WebUI.Controllers
         // GET: OrderManager
         public ActionResult Index()
         {
-
-            List<Order> orders = orderService.GetOrderList();
+            List<Order> orders = orderService.GetOrderList().OrderByDescending(o => o.CreatedAt).ToList();
             return View(orders);
         }
 

@@ -57,6 +57,7 @@ namespace MyShop.WebUI.Controllers
                 {
                     Email = customer.Email,
                     City = customer.City,
+                    Street = customer.Street,
                     State = customer.State,
                     FirstName = customer.FirstName,
                     Surname = customer.LastName,
