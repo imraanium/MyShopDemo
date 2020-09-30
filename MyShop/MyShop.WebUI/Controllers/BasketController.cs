@@ -76,8 +76,9 @@ namespace MyShop.WebUI.Controllers
         {
             var basketItems = basketService.GetBasketItems(this.HttpContext);
             order.OrderStatus = "Order Created";
+            order.Email = User.Identity.Name;
 
-            //Process Payment
+            //Process Payment 
 
             order.OrderStatus = "Payment Processed";
             orderService.CreateOrder(order, basketItems);
