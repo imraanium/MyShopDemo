@@ -12,12 +12,10 @@ namespace MyShop.Services
     public class OrderService : IOrderService
     {
         IRepository<Order> orderContext;
-        //
-        IRepository<OrderItem> orderItemContext;
-        public OrderService(IRepository<Order> OrderContext, IRepository<OrderItem> orderItemContext)
+
+        public OrderService(IRepository<Order> OrderContext)
         {
             this.orderContext = OrderContext;
-            this.orderItemContext = orderItemContext;
         }
 
         public void CreateOrder(Order baseOrder, List<BasketItemViewModel> basketItems)
@@ -57,26 +55,11 @@ namespace MyShop.Services
         public void DeleteOrder(string OrderId)
         {
            Order orderToDelete = orderContext.Find(OrderId);
-           List<OrderItem> itemList = orderToDelete.OrderItems.ToList();
-
             
-            Console.WriteLine("List of items: " + itemList);
-            
-            if (itemList != null)
+            if (orderToDelete != null)
             {
-                for(int i=0; i<itemList.Count; i++)
-                {
-                    //OrderItem OrderItemToDelete;
-                    orderItemContext.Delete(itemList[i].ToString());
-                    //OrderItemToDelete.Delete();
-                    orderItemContext.Commit();
-                }
                 orderContext.Delete(OrderId);
                 orderContext.Commit();
-            }
-            else
-            {
-                Console.WriteLine("No Items Found");
             }
         }
     }
