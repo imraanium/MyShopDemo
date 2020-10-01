@@ -14,6 +14,5 @@ namespace MyShop.Core.Contracts
         List<Order> GetOrderList();
         Order GetOrder(string Id);
         void UpdateOrder(Order updateOrder);
-        void DeleteOrder(string OrderId);
     }
 }
