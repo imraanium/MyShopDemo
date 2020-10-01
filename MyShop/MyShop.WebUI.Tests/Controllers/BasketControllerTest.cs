@@ -23,11 +23,12 @@ namespace MyShop.WebUI.Tests.Controllers
             IRepository<Product> products = new MockContext<Product>();
             IRepository<Order> orders = new MockContext<Order>();
             IRepository<Customer> customers = new MockContext<Customer>();
+            IRepository<OrderItem> orderItem = new MockContext<OrderItem>();
 
             var httpContext = new MockHttpContext();
 
             IBasketService basketService = new BasketService(products, baskets);
-            IOrderService orderService = new OrderService(orders);
+            IOrderService orderService = new OrderService(orders, orderItem);
 
             var controller = new BasketController(basketService, orderService, customers);
             controller.ControllerContext = new System.Web.Mvc.ControllerContext(httpContext, new System.Web.Routing.RouteData(), controller);
@@ -50,6 +51,7 @@ namespace MyShop.WebUI.Tests.Controllers
             IRepository<Product> products = new MockContext<Product>();
             IRepository<Order> orders = new MockContext<Order>();
             IRepository<Customer> customers = new MockContext<Customer>();
+            IRepository<OrderItem> orderItem = new MockContext<OrderItem>();
 
 
             products.Insert(new Product() { Id = "1", Price = 10.00m });
@@ -61,7 +63,7 @@ namespace MyShop.WebUI.Tests.Controllers
             baskets.Insert(basket);
 
             IBasketService basketService = new BasketService(products, baskets);
-            IOrderService orderService = new OrderService(orders);
+            IOrderService orderService = new OrderService(orders, orderItem);
 
             var controller = new BasketController(basketService, orderService, customers);
             var httpContext = new MockHttpContext();
@@ -81,6 +83,7 @@ namespace MyShop.WebUI.Tests.Controllers
         {
             IRepository<Customer> customers = new MockContext<Customer>();
             IRepository<Product> products = new MockContext<Product>();
+            IRepository<OrderItem> orderItem = new MockContext<OrderItem>();
             products.Insert(new Product() { Id = "1", Price = 10.00m });
             products.Insert(new Product() { Id = "2", Price = 5.00m });
 
@@ -94,7 +97,7 @@ namespace MyShop.WebUI.Tests.Controllers
             IBasketService basketService = new BasketService(products, baskets);
 
             IRepository<Order> orders = new MockContext<Order>();
-            IOrderService orderService = new OrderService(orders);
+            IOrderService orderService = new OrderService(orders,orderItem);
 
             customers.Insert(new Customer() { Id = "1", Email = "imraaniium@hotmail.com", ZipCode = "71503" });
 

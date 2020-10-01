@@ -45,5 +45,22 @@ namespace MyShop.WebUI.Controllers
 
             return RedirectToAction("Index");
         }
+        public ActionResult Delete(string Id)
+        {
+            Order order = orderService.GetOrder(Id);
+
+            return View(order);
+        }
+        [HttpPost]
+        [ActionName("Delete")]
+        public ActionResult ConfirmDelete(string Id)
+        {
+            orderService.DeleteOrder(Id);
+
+            return RedirectToAction("Index");
+        }
+    
     }
+
+    
 }
